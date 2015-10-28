@@ -5,7 +5,11 @@ It is designed as a 'Spaghetti stack' and depends on a generic hash table, <br>
 in which keys are strings and values can be of whatever value,  <br>
 and lists for storing the buckets of every element of the table. <br>
 
-### Spaghetti Stack
+### Structures:
+- Hash Table
+- Collision List
+
+### Spaghetti Stack:
 
 A spaghetti stack is an N-ary tree data structure in which child nodes <br>
 have pointers to the parent nodes (but not vice-versa)
