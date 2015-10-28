@@ -1,8 +1,7 @@
 # Symbol Table
 
 This is an implementation of a symbol table data structure. It is designed as a 'Spaghetti stack' and depends on a generic hash
-table, in which keys are strings and values can be of whatever value,  and lists for storing the buckets of every element of the
-table. <br>
+table, in which keys are strings and values can be of whatever value, elements of the same hashing value are stored into collision lists on every table's element. <br>
 
 ### Structures:
 - Hash Table
