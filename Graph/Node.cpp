@@ -6,40 +6,48 @@
 //===-----------------------------------------------------------------===//
 /////////////////////////////////  Node Class  ////////////////////////////
 //===-----------------------------------------------------------------===//
+
 // Constructors / Destructor
 
 // Copy constructor
-Node::Node(Node &node) {
+Node::Node(Node &node) 
+{
     label = node.getLabel();
     outEdges = node.getOutEdges();
     inEdges = node.getInEdges();
 }
 
-Node::Node(std::string labelName) : label(labelName) {
+Node::Node(std::string labelName) : label(labelName) 
+{
     this->outEdges = new std::vector<Edge*>();
     this->inEdges = new std::vector<Edge*>();
 }
 
-Node::Node(std::string label, Node* initialTarget) {
+Node::Node(std::string label, Node* initialTarget) 
+{
     this->outEdges = new std::vector<Edge*>();
     this->inEdges = new std::vector<Edge*>();
     this->label = label;
     this->addTarget(label);
 }
 
-Node::~Node() {
+Node::~Node() 
+{
     int i;
-    if (inEdges == NULL) {
+    if (inEdges == NULL) 
+    {
         std::cerr << "Inedges null" <<std::endl;
     }
 
-    for(i = 0; i < (int) inEdges->size(); i++) {
+    for(i = 0; i < (int) inEdges->size(); i++) 
+    {
         Node* source = (*inEdges)[i]->getSource();
         source->removeOutEdge((*inEdges)[i]);
         delete (*inEdges)[i];
     }
 
-    for(i = 0; i < (int) outEdges->size(); i++) {
+    for(i = 0; i < (int) outEdges->size(); i++) 
+    {
         Node * target = (*outEdges)[i]->getTarget();
         target->removeInEdge((*outEdges)[i]);
         delete (*outEdges)[i];
@@ -51,26 +59,37 @@ Node::~Node() {
 //===-----------------------------------------------------------------===//
 // Setters / Getters
 
-std::string Node::getLabel() {
+std::string 
+Node::getLabel() 
+{
     return label;
 }
 
-void Node::takeLabel(Node * node) {
+void 
+Node::takeLabel(Node * node) 
+{
     this->label = node->getLabel();
 }
 
-std::vector<Edge*> * Node::getOutEdges() {
+std::vector<Edge*> * 
+Node::getOutEdges() 
+{
     return outEdges;
 }
 
-std::vector<Edge*> * Node::getInEdges() {
+std::vector<Edge*> * 
+Node::getInEdges() 
+{
     return inEdges;
 }
 
-std::vector<Node*> * Node::getOutNodes() {
+std::vector<Node*> * 
+Node::getOutNodes() 
+{
     std::vector<Node *> * outVertices = new std::vector<Node *>();
     std::vector<Edge *>::iterator outIterator = outEdges->begin();
-    for(; outIterator != outEdges->end(); outIterator++) {
+    for(; outIterator != outEdges->end(); outIterator++) 
+    {
         outVertices->push_back((*outIterator)->getTarget());
     }
     return outVertices;
@@ -79,11 +98,15 @@ std::vector<Node*> * Node::getOutNodes() {
 //===-----------------------------------------------------------------===//
 // Helper methods: add/remove edges
 
-void Node::removeInEdge(Edge* edge) {
+void 
+Node::removeInEdge(Edge* edge) 
+{
     std::vector<Edge *>::iterator inEdgesIterator = inEdges->begin();
     int i = 0;
-    for(; inEdgesIterator != inEdges->end(); inEdgesIterator++, i++) {
-        if(*inEdgesIterator == edge) {
+    for(; inEdgesIterator != inEdges->end(); inEdgesIterator++, i++) 
+    {
+        if(*inEdgesIterator == edge) 
+        {
             break;
         }
     }
@@ -92,10 +115,13 @@ void Node::removeInEdge(Edge* edge) {
         inEdges->erase(inEdges->begin() + i);
 }
 
-void Node::removeOutEdge(Edge * edge) {
+void 
+Node::removeOutEdge(Edge * edge) 
+{
     std::vector<Edge *>::iterator outEdgesIterator = outEdges->begin();
     int i = 0;
-    for(; outEdgesIterator != outEdges->end(); outEdgesIterator++, i++) {
+    for(; outEdgesIterator != outEdges->end(); outEdgesIterator++, i++) 
+    {
         if(*outEdgesIterator == edge)
             break;
     }
@@ -104,25 +130,33 @@ void Node::removeOutEdge(Edge * edge) {
         outEdges->erase(outEdges->begin() + i);
 }
 
-void Node::addTarget(Node* targetNode) {
+void 
+Node::addTarget(Node* targetNode) 
+{
     Edge* newEdge = new Edge(this, targetNode);
 
-    if (!alreadyHasEdge(targetNode)) {
+    if (!alreadyHasEdge(targetNode)) 
+    {
         this->outEdges->push_back(newEdge);
         targetNode->getInEdges()->push_back(newEdge);
     }
 }
 
-void Node::addTarget(std::string targetVar) {
+void
+Node::addTarget(std::string targetVar) 
+{
     Node * targetNode = new Node(targetVar);
     this->addTarget(targetNode);
 }
 
 // given another Node, this method copies every edge outgoing from
 // the other Node and adds to this one
-void Node::addTargetsOfOther(Node * otherNode) {
+void 
+Node::addTargetsOfOther(Node * otherNode) 
+{
     std::vector<Edge*> copyEdges = *(otherNode->getOutEdges());
-    for (int i = 0; i < (int) copyEdges.size(); i++) {
+    for (int i = 0; i < (int) copyEdges.size(); i++) 
+    {
         Edge* edgeToCopy = copyEdges[i];
         this->addTarget(edgeToCopy->getTarget());
     }
@@ -130,17 +164,23 @@ void Node::addTargetsOfOther(Node * otherNode) {
 
 // check if a Node has an edge to the input target Node
 // (used so don't add duplicates in addTargetsOfOther
-bool Node::alreadyHasEdge(Node * targetNode) {
+bool 
+Node::alreadyHasEdge(Node * targetNode) 
+{
     std::vector<Node *> outVertices =  *(this->getOutNodes());
     std::vector<Node *>::iterator it = outVertices.begin();
-    for (; it != outVertices.end(); it++) {
-        if (*it == targetNode) {
+    for (; it != outVertices.end(); it++) 
+    {
+        if (*it == targetNode) 
+        {
             return true;
         }
     }
     return false;
 }
 
-std::string Node::toString() {
+std::string 
+Node::toString() 
+{
     return label;
 }
