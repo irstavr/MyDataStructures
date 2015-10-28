@@ -1,8 +1,9 @@
 # Symbol Table
 
 This is an implementation of a symbol table data structure. <br>
-It is designed as a 'Spaghetti stack' and depends on a generic hash table <br>
-structure and lists for storing the buckets of every element of the table. <br>
+It is designed as a 'Spaghetti stack' and depends on a generic hash table, <br>
+in which keys are strings and values can be of whatever value,  <br>
+and lists for storing the buckets of every element of the table. <br>
 
 ### Spaghetti Stack
 
