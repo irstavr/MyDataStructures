@@ -84,7 +84,6 @@ void Node::removeInEdge(Edge* edge) {
     int i = 0;
     for(; inEdgesIterator != inEdges->end(); inEdgesIterator++, i++) {
         if(*inEdgesIterator == edge) {
-            //std::cout << "i = " << i << "\n";
             break;
         }
     }
