@@ -1,14 +1,18 @@
 # Graph Algorithm
 
-Implementation of a directed Graph algorithm in C++. <br>
-Creation of the Graph. Supports various operations on <br>
-the edges and nodes of the graph.
+Implementation of a Directed Graph algorithm in C++ language. <br>
+Supports various operations on the edges and nodes of the graph.
 
-### Operations:
-- makeNode - 
-clone nodes <br>
-add targets of other  <br>
-add sources of other  <br>
-merge vertices of two nodes  <br>
-take node's labels and add them to another one  <br>
-
+### Operations :
+- createNode
+- cloneNode 
+- removeNode
+- createEdge
+- getNodeAtLabel
+- addTargetsOfOther
+- addSourcesOfOther
+- unionize
+- merge
+- takeLabels
+- createDotFile
+- printGraph
