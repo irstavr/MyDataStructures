@@ -1,8 +1,8 @@
 /*
 * Edge.h
 */
-#ifndef LLVM_CFG_EDGE_H_
-#define LLVM_CFG_EDGE_H_
+#ifndef EDGE_H_
+#define EDGE_H_
 #include <string>
 #include "Node.h"
 
