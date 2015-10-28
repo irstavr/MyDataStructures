@@ -6,15 +6,20 @@
 
 /////////////////    Edge class    ///////////////////////
 
-Edge::Edge(Node * source, Node * target) {
+Edge::Edge(Node * source, Node * target) 
+{
     this->source = source;
     this->target = target;
 }
 
-Node* Edge::getTarget() {
+Node* 
+Edge::getTarget() 
+{
     return target;
 }
 
-Node* Edge::getSource() {
+Node* 
+Edge::getSource() 
+{
     return source;
 }
