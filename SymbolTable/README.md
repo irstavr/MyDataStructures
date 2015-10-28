@@ -18,8 +18,9 @@ Spaghetti stack structure is used in situations when records are dynamically <br
 pushed and popped onto a stack as execution progresses, but references to the <br>
 popped records remain in use. Following are some applications of Spaghetti Stack. <br>
 
-Compilers, for languages such as C, create a spaghetti stack as it opens and closes symbol tables<br>
-representing block scopes. When a new block scope is opened, a symbol table is pushed onto a stack. <br>
-When the closing curly brace is encountered, the scope is closed and the symbol table is popped. <br>
-But that symbol table is remembered, rather than destroyed. <br>
-And of course it remembers its higher level “parent” symbol table and so on.
+Compilers, for languages such as C, create a spaghetti stack as it opens and <br>
+closes symbol tables representing block scopes. When a new block scope is opened, <br>
+a symbol table is pushed onto a stack. <br>
+When the closing curly brace is encountered, the scope is closed and the symbol table <br>
+is popped. But that symbol table is remembered, rather than destroyed. <br>
+And of course it remembers its higher level “parent” symbol table and so on. <br>
