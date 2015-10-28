@@ -36,7 +36,6 @@ Graph::~Graph(void)
 Node* 
 Graph::makeNode(std::string label) 
 {
-    std::cerr << "\n" << __FUNCTION__ << std::endl;
     // check if already exists
     Node* newNode = getNodeAtLabel(label);
     if (newNode == NULL) 
