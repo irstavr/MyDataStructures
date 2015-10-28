@@ -85,11 +85,14 @@ public:
 * key, so you don't have to worry about its allocation.
 */
 template <class Value>
-void Hashtable<Value>::enter(std::string key, Value val, bool overwrite) {
+void 
+Hashtable<Value>::enter(std::string key, Value val, bool overwrite) 
+{
     assert(val);
     Value prev;
 
-    if (overwrite && (prev = lookup(key))) {
+    if (overwrite && (prev = lookup(key))) 
+    {
         remove(key, prev);
     }
     mmap.insert(std::make_pair(key, val));
@@ -101,15 +104,20 @@ void Hashtable<Value>::enter(std::string key, Value val, bool overwrite) {
 * changes are made.  Does not affect any other entries under that key.
 */
 template <class Value>
-    void Hashtable<Value>::remove(std::string key, Value val) {
-        if (mmap.count(key) == 0) { // no matches at all
+    void 
+    Hashtable<Value>::remove(std::string key, Value val) 
+    {
+        if (mmap.count(key) == 0) 
+        { // no matches at all
             return;
         }
 
         typename std::multimap<std::string, Value>::iterator itr;
         itr = mmap.find(key); // start at first occurrence
-        while (itr != mmap.upper_bound(key)) {
-            if (itr->second == val) { // iterate to find matching pair
+        while (itr != mmap.upper_bound(key)) 
+        {
+            if (itr->second == val) 
+            { // iterate to find matching pair
                 mmap.erase(itr);
                 break;
             }
@@ -123,16 +131,21 @@ template <class Value>
 * if there is no matching entry
 */
 template <class Value>
-Value Hashtable<Value>::lookup(std::string key) {
+Value 
+Hashtable<Value>::lookup(std::string key) 
+{
     Value found = NULL;
 
-    if (mmap.count(key) > 0) {
+    if (mmap.count(key) > 0) 
+    {
         typename std::multimap<std::string, Value>::iterator cur, last, prev;
         cur = mmap.find(key); // start at first occurrence
         last = mmap.upper_bound(key);
-        while (cur != last) { // iterate to find last entered
+        while (cur != last) 
+        { // iterate to find last entered
             prev = cur;
-            if (++cur == mmap.upper_bound(key)) { // have to go one too far
+            if (++cur == mmap.upper_bound(key)) 
+            { // have to go one too far
                 found = prev->second; // one before last was it
                 break;
             }
@@ -145,7 +158,9 @@ Value Hashtable<Value>::lookup(std::string key) {
 * ---------------------
 */
 template <class Value>
-int Hashtable<Value>::getNumEntries() const {
+int 
+Hashtable<Value>::getNumEntries() const 
+{
     return mmap.size();
 }
 
@@ -154,7 +169,9 @@ int Hashtable<Value>::getNumEntries() const {
 * Returns iterator which can be used to walk through all values in table.
 */
 template <class Value>
-Iterator<Value> Hashtable<Value>::getIterator() {
+Iterator<Value> 
+Hashtable<Value>::getIterator() 
+{
     return Iterator<Value>(mmap);
 }
 
@@ -164,19 +181,24 @@ Iterator<Value> Hashtable<Value>::getIterator() {
 * to next entry. Returns null if no more values exist.
 */
 template <class Value>
-Value Iterator<Value>::getNextValue() {
-    if (cur != end) {
+Value 
+Iterator<Value>::getNextValue() 
+{
+    if (cur != end) 
+    {
         return (*cur++).second;
     }
     return NULL;
 }
 
 template <class Value>
-void Hashtable<Value>::printall(void) {
+void
+Hashtable<Value>::printall(void)
+{
     typename std::multimap<std::string, Value>::const_iterator cur;
 
-    for (cur = mmap.begin(); cur != mmap.end(); ++cur) {
-
+    for (cur = mmap.begin(); cur != mmap.end(); ++cur)
+    {
         char *cstr = new char[(cur->first).length() + 1];
         strcpy(cstr, (cur->first).c_str());
 
@@ -190,5 +212,4 @@ void Hashtable<Value>::printall(void) {
         delete [] cstr;
     }
 }
-
 #endif
