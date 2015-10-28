@@ -3,11 +3,8 @@
 */
 #ifndef LLVM_CFG_EDGE_H_
 #define LLVM_CFG_EDGE_H_
-
 #include <string>
 #include "Node.h"
-
-using namespace llvm;
 
 class Node;
 
