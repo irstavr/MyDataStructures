@@ -32,13 +32,17 @@ public:
     List() {}
 
     // Returns count of elements currently in list
-    int getNumElements() const {
+    int 
+    getNumElements() const 
+    {
         return elems.size();
     }
 
     // Returns element at index in list. Indexing is 0-based.
     // Raises an assert if index is out of range.
-    Element getNth(int index) const {
+    Element
+    getNth(int index) const 
+    {
         assert(index >= 0);
         assert(index < getNumElements());
         return elems[index];
@@ -46,19 +50,25 @@ public:
 
     // Inserts element at index, shuffling over others
     // Raises assert if index out of range
-    void insertAt(const Element &elem, int index) {
+    void 
+    insertAt(const Element &elem, int index) 
+    {
         assert(index >= 0 && index <= getNumElements());
         elems.insert(elems.begin() + index, elem);
     }
 
     // Adds element to list end
-    void append(const Element &elem) {
+    void 
+    append(const Element &elem)
+    {
         elems.push_back(elem);
     }
 
     // Removes element at index, shuffling down others
     // Raises assert if index out of range
-    void removeAt(int index) {
+    void 
+    removeAt(int index)
+    {
         assert(index >= 0 && index < getNumElements());
         elems.erase(elems.begin() + index);
     }
@@ -68,18 +78,23 @@ public:
     // messages, but since C++ only instantiates the template if you use
     // you can still have Lists of ints, chars*, as long as you
     // don't try to setParentAll on that list.
-    void setParentAll(Node *p) {
-        for (int i = 0; i < getNumElements(); i++) {
+    void 
+    setParentAll(Node *p) 
+    {
+        for (int i = 0; i < getNumElements(); i++)
+        {
             getNth(i)->set_parent(p);
         }
     }
 
-    void printAll(int indentLevel, const char *label = NULL) {
-        for (int i = 0; i < getNumElements(); i++) {
+    void
+    printAll(int indentLevel, const char *label = NULL)
+    {
+        for (int i = 0; i < getNumElements(); i++) 
+        {
             getNth(i)->print(indentLevel, label);
         }
     }
 
 };
-
 #endif
