@@ -1,5 +1,4 @@
 #include "Graph.h"
-#include "llvm/Support/raw_ostream.h"
 #include <fstream>
 #include <iostream>
 
@@ -83,17 +82,8 @@ bool Graph::createEdge(std::string sourceVar, std::string targetVar) {
 void Graph::createEdge(Node* src, Node* tgt) {
     assert(src && "No src node");
     assert(tgt && "No tgt node");
-    std::cerr << "\n" << __FUNCTION__ << std::endl;
-
-//    if (unionize(src, tgt)) {
-//        // the target Node was merged with one of the sources's children
-//        return;
-//    }
-//    else {
-        // no merge happened so add the target as normal
-        src->addTarget(tgt);
-        return;
-//    }
+    src->addTarget(tgt);
+    return;
 }
 
 //===-----------------------------------------------------------------===//
@@ -144,14 +134,11 @@ bool Graph::cloneNode(std::string newLabel, std::string oldLabel) {
 // Accesses Node
 
 Node* Graph::getNodeAtLabel(std::string label) {
-    // note: this may need a safety check since apparently
-    // throws an exception
     if (nodeMap->find(label) != nodeMap->end()) {
         return nodeMap->at(label);
     } else {
         return NULL;
     }
-    //return (*nodeMap)[label];
 }
 
 //===-----------------------------------------------------------------===//
@@ -164,7 +151,6 @@ Node* Graph::getNodeAtLabel(std::string label) {
 // updated, and the target Node is removed from the graph
 // return true if a merge happened, and false if no merge occurred
 bool Graph::unionize(Node* source, Node* target) {
-    //TODO:: this is currently segfaulting!!
     std::vector<Node *> children = *(source->getOutNodes());
     for (std::size_t i = 0; i < children.size(); i++) {
         Node * currentChild = children[i];
@@ -178,12 +164,9 @@ bool Graph::unionize(Node* source, Node* target) {
 // Node A will now have all incoming and outgoing edges that B had.
 // B is removed from the graph.
 void Graph::merge(Node * A, Node* B) {
-    std::cerr << "merge " << A->getLabel() << " and "
-                          << B->getLabel() << std::endl;
     addTargetsOfOther(A, B);
     addSourcesOfOther(A,B);
     takeLabels(A,B);
-    std::cerr << " removing " << B->getLabel() << std::endl;
     removeNode(B);
     return;
 }
@@ -219,7 +202,6 @@ void Graph::addSourcesOfOther(Node * thisNode, Node * otherNode) {
     std::vector<Edge*> copyEdges = *(otherNode->getInEdges());
     for (std::size_t i = 0; i < copyEdges.size(); i++) {
         Edge* edgeToCopy = copyEdges[i];
-        // no need to be recursive:
         edgeToCopy->getSource()->addTarget(thisNode);
     }
 }
@@ -273,10 +255,6 @@ void Graph::printAllNodes() {
 }
 
 void Graph::printGraph() {
-    std::cerr << "\n" << __FUNCTION__ << std::endl;
-
-    printAllNodes();
-
     for (std::size_t i = 0; i < nodes->size(); i++) {
         Node* currNode = (*nodes)[i];
         if(currNode != NULL) {
@@ -292,5 +270,4 @@ void Graph::printGraph() {
             }
         }
     }
-    std::cerr << "" <<std::endl;
 }
