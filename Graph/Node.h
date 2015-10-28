@@ -4,7 +4,6 @@
 #ifndef NODE_H_
 #define NODE_H_
 
-#include "llvm/Support/raw_ostream.h"
 #include <string.h>
 #include <iostream>
 #include <map>
