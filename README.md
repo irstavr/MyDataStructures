@@ -1,5 +1,3 @@
-# MyDataStructures
-
-## Algorithms for:
+# Algorithms for:
 - Graph
 - Symbol Table
